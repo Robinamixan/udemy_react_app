@@ -1,8 +1,12 @@
+import React from 'react';
+
+import ExpensesList from './components/Expenses/ExpensesList/ExpensesList';
+
+import expenses from './dummies/expenseItems';
+
 function App() {
   return (
-      <div>
-        <h2>Let's get started!</h2>
-      </div>
+      <ExpensesList expenses={expenses}/>
   );
 }
 
