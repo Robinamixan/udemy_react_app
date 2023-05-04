@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ExpenseItem from '../ExpenseItem/ExpenseItem';
+import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 import Card from '../../Card/Card';
 
 import './ExpensesList.css';
@@ -13,8 +14,23 @@ ExpensesList.propTypes = {
 function ExpensesList(props) {
   const expenses = props.expenses;
 
+  const [expenseFilter, setExpenseFilter] = React.useState({
+    year: '2020',
+  });
+
+  const filterUpdateHandler = (filterData) => {
+    console.log(filterData);
+    setExpenseFilter({
+      year: filterData.year,
+    });
+  };
+
   return (
       <Card className={'expenses'}>
+        <ExpenseFilter
+            currentFilter={expenseFilter}
+            onFilterUpdate={filterUpdateHandler}
+        />
         <ExpenseItem
             title={expenses[0].title}
             price={expenses[0].price}
