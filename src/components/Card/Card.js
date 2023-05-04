@@ -5,7 +5,7 @@ import './Card.css';
 
 Card.propTypes = {
   className: PropTypes.string,
-  children: React.ReactNode,
+  children: PropTypes.node,
 };
 
 function Card(props) {
