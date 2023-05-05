@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ExpenseItem from '../ExpenseItem/ExpenseItem';
+import ExpenseItems from '../ExpenseItems/ExpenseItems';
 import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 import Card from '../../Card/Card';
 
@@ -12,14 +12,15 @@ ExpensesList.propTypes = {
 };
 
 function ExpensesList(props) {
-  const expenses = props.expenses;
-
   const [expenseFilter, setExpenseFilter] = React.useState({
     year: '2020',
   });
 
+  const expenses = props.expenses.filter(expense => {
+    return expense.date.getFullYear().toString() === expenseFilter.year;
+  });
+
   const filterUpdateHandler = (filterData) => {
-    console.log(filterData);
     setExpenseFilter({
       year: filterData.year,
     });
@@ -31,18 +32,7 @@ function ExpensesList(props) {
             currentFilter={expenseFilter}
             onFilterUpdate={filterUpdateHandler}
         />
-        <ExpenseItem
-            title={expenses[0].title}
-            price={expenses[0].price}
-            date={expenses[0].date}
-            currency={expenses[0].currency}
-        />
-        <ExpenseItem
-            title={expenses[1].title}
-            price={expenses[1].price}
-            date={expenses[1].date}
-            currency={expenses[1].currency}
-        />
+        <ExpenseItems expenses={expenses}/>
       </Card>
   );
 }

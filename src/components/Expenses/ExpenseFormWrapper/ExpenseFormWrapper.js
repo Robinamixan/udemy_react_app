@@ -14,6 +14,7 @@ function ExpenseFormWrapper(props) {
     const expenseData = {
       ...formExpenseData,
       id: Math.random().toString(),
+      currency: '$'
     };
 
     props.onAddExpense(expenseData);

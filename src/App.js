@@ -3,10 +3,18 @@ import React from 'react';
 import ExpensesList from './components/Expenses/ExpensesList/ExpensesList';
 import ExpenseFormWrapper from './components/Expenses/ExpenseFormWrapper/ExpenseFormWrapper';
 
-import expenses from './dummies/expenseItems';
+import dummyExpenses from './dummies/expenseItems';
 
 function App() {
+  const [expenses, setExpenses] = React.useState(dummyExpenses);
+
   const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => {
+      return [
+        expense,
+        ...prevExpenses
+      ];
+    });
     console.log(expense);
   };
 
