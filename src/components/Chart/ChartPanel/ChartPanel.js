@@ -21,7 +21,7 @@ function ChartPanel(props) {
               value={dataPoint.value}
               maxValue={maxValue}
               label={dataPoint.label}
-          />
+          />;
         })}
       </div>
   );
