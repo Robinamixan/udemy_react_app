@@ -40,7 +40,7 @@ function ExpenseForm(props) {
 
     const expenseData = {
       title: formInput.titleInput,
-      price: formInput.priceInput,
+      price: +formInput.priceInput,
       date: new Date(formInput.dateInput),
     };
 

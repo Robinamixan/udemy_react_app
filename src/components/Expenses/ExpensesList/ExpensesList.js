@@ -6,6 +6,7 @@ import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 import Card from '../../Card/Card';
 
 import './ExpensesList.css';
+import ExpensesChart from '../ExpensesChart/ExpensesChart';
 
 ExpensesList.propTypes = {
   expenses: PropTypes.array,
@@ -32,6 +33,7 @@ function ExpensesList(props) {
             currentFilter={expenseFilter}
             onFilterUpdate={filterUpdateHandler}
         />
+        <ExpensesChart expenses={expenses}/>
         <ExpenseItems expenses={expenses}/>
       </Card>
   );

@@ -15,7 +15,6 @@ function App() {
         ...prevExpenses
       ];
     });
-    console.log(expense);
   };
 
   return (
