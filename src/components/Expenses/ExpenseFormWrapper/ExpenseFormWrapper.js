@@ -10,6 +10,8 @@ ExpenseFormWrapper.propTypes = {
 };
 
 function ExpenseFormWrapper(props) {
+  const [isExpenseFormVisible, setExpenseFormVisibility] = React.useState(false);
+
   const saveExpenseData = (formExpenseData) => {
     const expenseData = {
       ...formExpenseData,
@@ -18,11 +20,28 @@ function ExpenseFormWrapper(props) {
     };
 
     props.onAddExpense(expenseData);
+    setExpenseFormVisibility(false);
   };
+
+  const showExpenseForm = () => {
+    setExpenseFormVisibility(true);
+  };
+
+  const hideExpenseForm = () => {
+    setExpenseFormVisibility(false);
+  };
+
+  if (!isExpenseFormVisible) {
+    return (
+        <div className={'new-expense'}>
+          <button onClick={showExpenseForm}>Add new expense</button>
+        </div>
+    );
+  }
 
   return (
       <div className={'new-expense'}>
-        <ExpenseForm onSaveExpenseData={saveExpenseData}/>
+        <ExpenseForm onSaveExpenseData={saveExpenseData} onCancelExpenseData={hideExpenseForm}/>
       </div>
   );
 }
