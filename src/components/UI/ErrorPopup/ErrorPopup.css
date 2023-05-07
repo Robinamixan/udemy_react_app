@@ -1,0 +1,24 @@
+.popup-box {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(14, 14, 14, 0.8);
+    transition: all 0.4s;
+}
+
+.popup-content {
+    background-color: white;
+    border-radius: 12px;
+}
+
+.popup-content h1 {
+    background-color: #8b005d;
+    margin: 0 0 0.5rem 0;
+    padding: 1rem;
+    color: white;
+}

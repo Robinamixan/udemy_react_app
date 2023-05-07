@@ -1,0 +1,30 @@
+.create-user-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.create-user-form .form-control {
+    margin: 0.5rem 0;
+}
+
+.create-user-form .form-control label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.create-user-form .form-control input {
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    font: inherit;
+    line-height: 1.5rem;
+    padding: 0 0.25rem;
+}
+
+.create-user-form .form-control input:focus {
+    outline: none;
+    background: #fad0ec;
+    border-color: #8b005d;
+}

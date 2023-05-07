@@ -17,7 +17,7 @@ const CourseGoalItem = (props) => {
 
 CourseGoalItem.propTypes = {
   onDelete: PropTypes.func,
-  children: React.ReactNode,
+  children: PropTypes.node,
   id: PropTypes.any
 };
 
