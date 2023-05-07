@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../../UI/Button/Button';
 import styles from './CourseInput.module.css';
@@ -34,6 +35,10 @@ const CourseInput = (props) => {
       <Button type="submit">Add Goal</Button>
     </form>
   );
+};
+
+CourseInput.propTypes = {
+  onAddGoal: PropTypes.func
 };
 
 export default CourseInput;

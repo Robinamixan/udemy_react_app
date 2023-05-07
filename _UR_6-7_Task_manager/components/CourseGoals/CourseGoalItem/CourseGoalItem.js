@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './CourseGoalItem.css';
 
@@ -12,6 +13,12 @@ const CourseGoalItem = (props) => {
       {props.children}
     </li>
   );
+};
+
+CourseGoalItem.propTypes = {
+  onDelete: PropTypes.func,
+  children: React.ReactNode,
+  id: PropTypes.any
 };
 
 export default CourseGoalItem;

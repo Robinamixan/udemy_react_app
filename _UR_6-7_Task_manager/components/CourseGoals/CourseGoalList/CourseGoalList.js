@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import CourseGoalItem from '../CourseGoalItem/CourseGoalItem';
 import './CourseGoalList.css';
@@ -17,6 +18,11 @@ const CourseGoalList = props => {
       ))}
     </ul>
   );
+};
+
+CourseGoalList.propTypes = {
+  items: PropTypes.array,
+  onDeleteItem: PropTypes.func
 };
 
 export default CourseGoalList;
