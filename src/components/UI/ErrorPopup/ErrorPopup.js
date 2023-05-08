@@ -1,26 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './ErrorPopup.css';
+import classes from './ErrorPopup.module.css';
 import Button from '../Button/Button';
 
 ErrorPopup.propTypes = {
-  isVisible: PropTypes.bool,
+  title: PropTypes.string,
   message: PropTypes.string,
-  hidePopup: PropTypes.func
+  onClose: PropTypes.func
 };
 
 function ErrorPopup(props) {
   return (
-      <div className={'popup-box'} onClick={props.hidePopup}>
-        <div className={'popup-content'}>
-          <h1>
-            Invalid Input
-          </h1>
-          <div className={'popup-content__message'}>
-            {props.message}
+      <div>
+        <div className={classes.backdrop} onClick={props.onClose}></div>
+        <div className={classes['popup-box']}>
+          <header className={classes.header}>
+            <h2>{props.title}</h2>
+          </header>
+          <div className={classes['popup-content']}>
+            <div className={'popup-content__message'}>
+              {props.message}
+            </div>
           </div>
-          <Button onClick={props.hidePopup}>Okay</Button>
+          <footer className={classes.actions}>
+            <Button onClick={props.onClose}>Okay</Button>
+          </footer>
         </div>
       </div>
   );

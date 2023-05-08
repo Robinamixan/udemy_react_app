@@ -9,22 +9,13 @@ import ErrorPopup from './components/UI/ErrorPopup/ErrorPopup';
 function App() {
   const [users, setUsers] = React.useState([]);
   const [popupState, setPopupState] = React.useState({
-    message: 'Invalid Value',
+    message: '',
     isVisible: false,
   });
 
   const usersExist = users.length > 0;
 
   const createUserHandler = (enteredValues) => {
-    if (!enteredValues.name || !enteredValues.age) {
-      setPopupState({
-        message: 'Entered empty values!',
-        isVisible: true,
-      });
-
-      return;
-    }
-
     setUsers((prevState) => {
       return [
         {
@@ -37,9 +28,16 @@ function App() {
     });
   };
 
+  const showPopupHandler = (message) => {
+    setPopupState({
+      message: message,
+      isVisible: true,
+    });
+  };
+
   const hidePopupHandler = () => {
     setPopupState({
-      message: 'Entered empty values!',
+      message: '',
       isVisible: false,
     });
   };
@@ -47,11 +45,15 @@ function App() {
   return (
       <div>
         <section id={'create-user-form'}>
-          <CreateUserForm createUserHandler={createUserHandler}/>
+          <CreateUserForm onUserCreate={createUserHandler} onFormError={showPopupHandler}/>
         </section>
         <section id={'create-form-popup'}>
           {
-              popupState.isVisible && <ErrorPopup hidePopup={hidePopupHandler} isVisible={true} message={'Invalid input'}/>
+              popupState.isVisible && <ErrorPopup
+                  onClose={hidePopupHandler}
+                  title={'Invalid Input'}
+                  message={popupState.message}
+              />
           }
         </section>
         {

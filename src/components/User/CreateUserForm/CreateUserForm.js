@@ -5,7 +5,8 @@ import './CreateUserForm.css';
 import Button from '../../UI/Button/Button';
 
 CreateUserForm.propTypes = {
-  createUserHandler: PropTypes.func
+  onUserCreate: PropTypes.func,
+  onFormError: PropTypes.func
 };
 
 function CreateUserForm(props) {
@@ -35,7 +36,17 @@ function CreateUserForm(props) {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    props.createUserHandler({
+    if (formValues.name.trim().length === 0 || formValues.age.trim().length === 0) {
+      props.onFormError('Empty values entered!');
+      return;
+    }
+
+    if (+formValues.age < 1) {
+      props.onFormError('Negative age entered!');
+      return;
+    }
+
+    props.onUserCreate({
       name: formValues.name,
       age: formValues.age
     });
@@ -49,12 +60,12 @@ function CreateUserForm(props) {
   return (
       <form className={'create-user-form'} onSubmit={formSubmitHandler}>
         <div className={'form-control'}>
-          <label>Username</label>
-          <input type="text" value={formValues.name} onChange={nameChangeHandler}/>
+          <label htmlFor={'username'}>Username</label>
+          <input id={'username'} type="text" value={formValues.name} onChange={nameChangeHandler}/>
         </div>
         <div className={'form-control'}>
-          <label>Age (Years)</label>
-          <input type="number" value={formValues.age} onChange={ageChangeHandler}/>
+          <label htmlFor={'user-age'}>Age (Years)</label>
+          <input id={'user-age'} type="number" value={formValues.age} onChange={ageChangeHandler}/>
         </div>
         <Button type="submit">Add User</Button>
       </form>
