@@ -10,62 +10,52 @@ CreateUserForm.propTypes = {
 };
 
 function CreateUserForm(props) {
-  const [formValues, setFormValues] = React.useState({
-    name: '',
-    age: ''
-  });
-
-  const nameChangeHandler = (event) => {
-    setFormValues((prevState) => {
-      return {
-        ...prevState,
-        name: event.target.value.trim()
-      };
-    });
-  };
-
-  const ageChangeHandler = (event) => {
-    setFormValues((prevState) => {
-      return {
-        ...prevState,
-        age: event.target.value.trim()
-      };
-    });
-  };
+  const usernameInputRef = React.useRef();
+  const ageInputRef = React.useRef();
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    if (formValues.name.trim().length === 0 || formValues.age.trim().length === 0) {
+    const usernameInputValue = usernameInputRef.current.value;
+    const ageInputValue = ageInputRef.current.value;
+
+    if (usernameInputValue.trim().length === 0 || ageInputValue.trim().length === 0) {
       props.onFormError('Empty values entered!');
       return;
     }
 
-    if (+formValues.age < 1) {
+    if (+ageInputValue < 1) {
       props.onFormError('Negative age entered!');
       return;
     }
 
     props.onUserCreate({
-      name: formValues.name,
-      age: formValues.age
+      name: usernameInputValue,
+      age: ageInputValue
     });
 
-    setFormValues({
-      name: '',
-      age: ''
-    });
-  }
+    // not recommended action
+    usernameInputRef.current.value = '';
+    ageInputRef.current.value = '';
+  };
 
   return (
       <form className={'create-user-form'} onSubmit={formSubmitHandler}>
         <div className={'form-control'}>
           <label htmlFor={'username'}>Username</label>
-          <input id={'username'} type="text" value={formValues.name} onChange={nameChangeHandler}/>
+          <input
+              ref={usernameInputRef}
+              id={'username'}
+              type="text"
+          />
         </div>
         <div className={'form-control'}>
           <label htmlFor={'user-age'}>Age (Years)</label>
-          <input id={'user-age'} type="number" value={formValues.age} onChange={ageChangeHandler}/>
+          <input
+              ref={ageInputRef}
+              id={'user-age'}
+              type="number"
+          />
         </div>
         <Button type="submit">Add User</Button>
       </form>
