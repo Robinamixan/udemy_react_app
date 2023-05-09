@@ -1,71 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import UserList from './components/User/UserList/UserList';
-import CreateUserForm from './components/User/CreateUserForm/CreateUserForm';
-import Wrapper from './components/Helpers/Wrapper';
-
-import './App.css';
-import ErrorPopup from './components/UI/ErrorPopup/ErrorPopup';
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import MainHeader from './components/MainHeader/MainHeader';
 
 function App() {
-  const [users, setUsers] = React.useState([]);
-  const [popupState, setPopupState] = React.useState({
-    message: '',
-    isVisible: false,
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const usersExist = users.length > 0;
-
-  const createUserHandler = (enteredValues) => {
-    setUsers((prevState) => {
-      return [
-        {
-          id: Math.random(),
-          name: enteredValues.name,
-          age: +enteredValues.age,
-        },
-        ...prevState,
-      ];
-    });
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    setIsLoggedIn(true);
   };
 
-  const showPopupHandler = (message) => {
-    setPopupState({
-      message: message,
-      isVisible: true,
-    });
-  };
-
-  const hidePopupHandler = () => {
-    setPopupState({
-      message: '',
-      isVisible: false,
-    });
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
   };
 
   return (
-      // React.Fragment and Wrapper doing the same thing
-      <React.Fragment>
-        <Wrapper>
-          <section id={'create-user-form'}>
-            <CreateUserForm onUserCreate={createUserHandler} onFormError={showPopupHandler}/>
-          </section>
-          <section id={'create-form-popup'}>
-            {
-                popupState.isVisible && <ErrorPopup
-                    onClose={hidePopupHandler}
-                    title={'Invalid Input'}
-                    message={popupState.message}
-                />
-            }
-          </section>
-          {
-              usersExist && <section id={'users-list'}>
-                <UserList users={users}/>
-              </section>
-          }
-        </Wrapper>
-      </React.Fragment>
+    <React.Fragment>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </React.Fragment>
   );
 }
 

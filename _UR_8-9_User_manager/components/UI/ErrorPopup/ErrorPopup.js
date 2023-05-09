@@ -6,7 +6,7 @@ import classes from './ErrorPopup.module.css';
 import Button from '../Button/Button';
 
 Backdrop.propTypes = {
-  onClose: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 function Backdrop(props) {
@@ -18,7 +18,7 @@ function Backdrop(props) {
 Overlay.propTypes = {
   title: PropTypes.string,
   message: PropTypes.string,
-  onClose: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 function Overlay(props) {
