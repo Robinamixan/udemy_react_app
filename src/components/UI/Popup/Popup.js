@@ -6,7 +6,8 @@ import Backdrop from './Backdrop';
 import PopupBox from './PopupBox';
 
 Popup.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  onBackdropClick: PropTypes.func
 };
 
 function Popup(props) {
@@ -15,7 +16,7 @@ function Popup(props) {
   return (
       <React.Fragment>
         {ReactDOM.createPortal(
-            <Backdrop/>
+            <Backdrop onClick={props.onBackdropClick}/>
         , portalElem)}
         {ReactDOM.createPortal(
             <PopupBox>{props.children}</PopupBox>

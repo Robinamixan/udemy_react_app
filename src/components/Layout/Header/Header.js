@@ -6,7 +6,7 @@ import mealsImage from '../../../assets/images/meals.jpg';
 import HeaderCartButton from '../HeaderCartButton/HeaderCartButton';
 
 Header.propTypes = {
-
+  onCartShow: PropTypes.func
 };
 
 function Header(props) {
@@ -14,7 +14,7 @@ function Header(props) {
     <React.Fragment>
       <header className={styles.header}>
         <h1>React Meals</h1>
-        <HeaderCartButton/>
+        <HeaderCartButton onClick={props.onCartShow}/>
       </header>
       <div className={styles['main-image']}>
         <img src={mealsImage} alt={'meals-background'}/>
