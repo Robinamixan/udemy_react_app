@@ -1,8 +1,18 @@
+import React from 'react';
+
+import Header from './components/Layout/Header/Header';
+import MealsContent from './components/Meals/MealsContent/MealsContent';
+import Cart from './components/Cart/Cart/Cart';
+
 function App() {
   return (
-    <div>
-      <h2>Let's get started!</h2>
-    </div>
+    <React.Fragment>
+      <Cart/>
+      <Header/>
+      <main>
+        <MealsContent/>
+      </main>
+    </React.Fragment>
   );
 }
 
