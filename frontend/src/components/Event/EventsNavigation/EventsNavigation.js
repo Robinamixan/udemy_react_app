@@ -13,7 +13,7 @@ function EventsNavigation() {
       <nav>
         <ul className={classes.list}>
           <li>
-            <NavLink to={'/events'} className={navLinkClassHandler}>All Events</NavLink>
+            <NavLink to={'/events'} className={navLinkClassHandler} end={true}>All Events</NavLink>
           </li>
           <li>
             <NavLink to={'/events/new'} className={navLinkClassHandler}>New Event</NavLink>
