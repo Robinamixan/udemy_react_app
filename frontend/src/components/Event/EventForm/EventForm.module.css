@@ -12,6 +12,7 @@
 
 .form input,
 .form textarea {
+  background-color: var(--color-gray-300);
   font: inherit;
   padding: 0.25rem;
 }

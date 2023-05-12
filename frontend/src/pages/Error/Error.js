@@ -6,6 +6,7 @@ import PageContent from '../../components/PageContent/PageContent';
 
 function Error() {
   const error = useRouteError();
+  console.log(error);
 
   let title = 'Some Error occurred';
   let message = 'Something went wrong!';

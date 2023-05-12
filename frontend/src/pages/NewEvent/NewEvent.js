@@ -1,10 +1,10 @@
 import React from 'react';
 
+import EventForm from '../../components/Event/EventForm/EventForm';
+
 function NewEvent() {
   return (
-      <>
-        <h2>New Event page</h2>
-      </>
+      <EventForm method={'post'}/>
   );
 }
 
