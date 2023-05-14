@@ -15,4 +15,5 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+// memo does not work because props.onClick function is recreated every time of parent rerender
+export default React.memo(Button);
