@@ -10,7 +10,7 @@ const Input = React.forwardRef(function (props, ref) {
         <input ref={ref} {...props.input}/>
       </div>
   );
-})
+});
 
 Input.displayName = 'Input';
 Input.propTypes = {

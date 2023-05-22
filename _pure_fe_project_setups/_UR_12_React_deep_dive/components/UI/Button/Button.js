@@ -1,6 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Button.module.css';
+
+Button.propTypes = {
+  type: PropTypes.string,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  children: PropTypes.node,
+};
 
 const Button = (props) => {
   return (

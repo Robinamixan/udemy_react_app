@@ -8,7 +8,7 @@ import CartItem from '../CartItem/CartItem';
 
 Cart.propTypes = {
   onCartHide: PropTypes.func
-}
+};
 
 function Cart(props) {
   const cartContext = React.useContext(CartContext);
