@@ -1,11 +1,21 @@
+import React from 'react';
+
 import Section from '../UI/Section';
 import TaskItem from './TaskItem';
 import classes from './Tasks.module.css';
+import PropTypes from 'prop-types';
 
-const Tasks = (props) => {
+Tasks.propTypes = {
+  items: PropTypes.array,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  onFetch: PropTypes.func,
+};
+
+function Tasks(props) {
   let taskList = <h2>No tasks found. Start adding some!</h2>;
 
-  if (props.items.length > 0) {
+  if (props.items.length) {
     taskList = (
       <ul>
         {props.items.map((task) => (
@@ -30,6 +40,6 @@ const Tasks = (props) => {
       <div className={classes.container}>{content}</div>
     </Section>
   );
-};
+}
 
 export default Tasks;
