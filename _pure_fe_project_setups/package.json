@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "./node_modules/.bin/eslint _UR_14_Http_requests"
+    "eslint": "./node_modules/.bin/eslint src"
   },
   "eslintConfig": {
     "extends": [
