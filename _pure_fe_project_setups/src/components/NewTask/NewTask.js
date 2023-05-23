@@ -10,7 +10,7 @@ NewTask.propTypes = {
 };
 
 function NewTask(props) {
-    const transformData = (data) => {
+    const transformData = (taskText, data) => {
         const generatedId = data.name; // firebase-specific => "name" contains generated id
         const createdTask = { id: generatedId, text: taskText };
 
