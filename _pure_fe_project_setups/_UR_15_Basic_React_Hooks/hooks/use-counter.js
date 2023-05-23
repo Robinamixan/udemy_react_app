@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const INITIAL_COUNT = 0;
 const COUNT_STEP = 1;
