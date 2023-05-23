@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './TaskItem.module.css';
-import PropTypes from 'prop-types';
 
 TaskItem.propTypes = {
   children: PropTypes.node,

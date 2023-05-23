@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Section from '../UI/Section';
 import TaskItem from './TaskItem';
 import classes from './Tasks.module.css';
-import PropTypes from 'prop-types';
 
 Tasks.propTypes = {
   items: PropTypes.array,
