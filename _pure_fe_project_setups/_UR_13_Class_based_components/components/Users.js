@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import User from './User';
-
-import classes from './Users.module.css';
 import PropTypes from 'prop-types';
+
+import User from './User';
+import classes from './Users.module.css';
 
 class Users extends Component {
     constructor() {
@@ -12,7 +12,7 @@ class Users extends Component {
         };
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate() {
         if (this.props.users.length === 0) {
             throw new Error('No user provided!');
         }
