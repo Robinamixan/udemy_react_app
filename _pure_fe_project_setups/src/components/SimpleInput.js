@@ -3,8 +3,6 @@ import React from 'react';
 import validateEmail from '../utils/validate-email.js';
 import useInput from '../hooks/use-input.js';
 
-SimpleInput.propTypes = {};
-
 function SimpleInput() {
     const {
         value: nameValue,

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import SimpleInput from './components/SimpleInput';
+import BasicForm from './components/BasicForm.js';
 
 function App() {
     return (
         <div className="app">
-            <SimpleInput />
+            <BasicForm />
         </div>
     );
 }
