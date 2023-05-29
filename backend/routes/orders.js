@@ -16,7 +16,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     const data = req.body;
-    console.log(data);
     let errors = {};
 
     if (!isValidText(data.userData.name)) {
