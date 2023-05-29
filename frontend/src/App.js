@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Header from './components/Layout/Header/Header.js';
-import Meals from './components/Meals/MealsList/MealsList.js';
+import MealsList from './components/Meals/MealsList/MealsList.js';
 import Cart from './components/Cart/Cart/Cart.js';
 import CartProvider from './store/CartProvider';
 
@@ -18,10 +18,10 @@ function App() {
 
     return (
         <CartProvider>
-            {cartIsShown && <Cart onClose={hideCartHandler} />}
-            <Header onShowCart={showCartHandler} />
+            {cartIsShown && <Cart onCartHide={hideCartHandler} />}
+            <Header onCartShow={showCartHandler} />
             <main>
-                <Meals />
+                <MealsList />
             </main>
         </CartProvider>
     );
