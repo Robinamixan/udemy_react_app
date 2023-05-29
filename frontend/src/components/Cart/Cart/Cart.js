@@ -5,6 +5,7 @@ import styles from './Cart.module.css';
 import Popup from '../../UI/Popup/Popup';
 import CartContext from '../../../store/cart-context';
 import CartItem from '../CartItem/CartItem';
+import Checkout from '../Checkout/Checkout.js';
 
 const PRICE_FRACTION_DIGITS = 2;
 
@@ -15,7 +16,12 @@ Cart.propTypes = {
 function Cart(props) {
     const cartContext = React.useContext(CartContext);
 
-    const totalAmount = `$${cartContext.totalAmount.toFixed(PRICE_FRACTION_DIGITS)}`;
+    const [isCheckout, setIsCheckout] = React.useState(false);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
+    const [isDidSubmit, setIsDidSubmit] = React.useState(false);
+
+    const totalAmount = `$${cartContext.totalAmount.toFixed(
+        PRICE_FRACTION_DIGITS)}`;
     const hasItems = !!cartContext.items.length;
 
     const addCartItemHandler = (item) => {
@@ -24,6 +30,28 @@ function Cart(props) {
 
     const removeCardItemHandler = (id) => {
         cartContext.removeItem(id);
+    };
+
+    const orderHandler = () => {
+        setIsCheckout(true);
+    };
+
+    const submitOrderHandler = async (userData) => {
+        setIsSubmitting(true);
+        await fetch('http://localhost:8080/orders', {
+            method: 'POST',
+            body: JSON.stringify({
+                userData: userData,
+                items: cartContext.items,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        setIsSubmitting(false);
+        setIsDidSubmit(true);
+
+        cartContext.clearCart();
     };
 
     const cartItems = cartContext.items.map(item => (
@@ -37,8 +65,22 @@ function Cart(props) {
         />
     ));
 
-    return (
-        <Popup onBackdropClick={props.onCartHide}>
+    const cartActions = (
+        <div className={styles.actions}>
+            <button
+                className={styles['button--alt']}
+                onClick={props.onCartHide}
+            >Close</button>
+            {hasItems && <button
+                className={styles.button}
+                onClick={orderHandler}
+                disabled={isSubmitting}
+            >Order</button>}
+        </div>
+    );
+
+    const cartPopupContent = (
+        <React.Fragment>
             <ul className={styles['cart-items']}>
                 {cartItems}
             </ul>
@@ -46,14 +88,32 @@ function Cart(props) {
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
+            {isCheckout && <Checkout onCartHide={props.onCartHide}
+                                     onConfirm={submitOrderHandler} />}
+            {!isCheckout && cartActions}
+        </React.Fragment>
+    );
+
+    const submittingMessage = <p>Submitting form data</p>;
+    const submitMessage = (
+        <React.Fragment>
+            <p>We did submit your data</p>
             <div className={styles.actions}>
                 <button
                     className={styles['button--alt']}
                     onClick={props.onCartHide}
-                >Close
+                >
+                    Close
                 </button>
-                {hasItems && <button className={styles.button}>Order</button>}
             </div>
+        </React.Fragment>
+    );
+
+    return (
+        <Popup onBackdropClick={props.onCartHide}>
+            {!isSubmitting && !isDidSubmit && cartPopupContent}
+            {isSubmitting && !isDidSubmit && submittingMessage}
+            {!isSubmitting && isDidSubmit && submitMessage}
         </Popup>
     );
 }

@@ -6,29 +6,42 @@ import MealItem from '../MealItem/MealItem';
 
 function MealsList() {
     const [meals, setMeals] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [error, setError] = React.useState(null);
 
     const fetchMealsHandler = async () => {
-        const response = await fetch('http://localhost:8080/meals', {
-            method: 'GET'
-        })
+        setIsLoading(true);
+        try {
+            const response = await fetch('http://localhost:8080/meals', {
+                method: 'GET'
+            })
 
-        if (!response.ok) {
-            console.log('Something went wrong');
-            return;
+            if (!response.ok) {
+                setError({
+                    message: 'Something went wrong'
+                });
+                return;
+            }
+
+            const responseData = await response.json();
+
+            const mealsData = responseData.meals.map((meal) => {
+                return {
+                    id: meal.id,
+                    name: meal.name,
+                    description: meal.description,
+                    price: meal.price,
+                };
+            });
+
+            setMeals(mealsData);
+            setIsLoading(false);
+        } catch (error) {
+            setError({
+                message: error.message
+            });
+            setIsLoading(false);
         }
-
-        const responseData = await response.json();
-
-        const mealsData = responseData.meals.map((meal) => {
-            return {
-                id: meal.id,
-                name: meal.name,
-                description: meal.description,
-                price: meal.price,
-            };
-        });
-
-        setMeals(mealsData);
     };
 
     React.useEffect(() => {
@@ -48,6 +61,8 @@ function MealsList() {
     return (
         <section className={styles.meals}>
             <Card>
+                {isLoading && <p>Loading...</p>}
+                {error && <p>Error: {error.message}</p>}
                 <ul>
                     {mealsList}
                 </ul>

@@ -3,6 +3,7 @@ const express = require('express');
 
 const eventRoutes = require('./routes/events');
 const mealRoutes = require('./routes/meals.js');
+const ordersRoutes = require('./routes/orders.js');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
 
 app.use('/events', eventRoutes);
 app.use('/meals', mealRoutes);
+app.use('/orders', ordersRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.status || 500;
