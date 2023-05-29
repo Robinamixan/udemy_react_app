@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { getAll, get, add, replace, remove } = require('../data/event');
+const { getAll, get, add, replace, remove } = require('../repositories/event.js');
 const {
   isValidText,
   isValidDate,
