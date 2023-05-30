@@ -1,12 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
-import BasicForm from './components/BasicForm.js';
+import Counter from './components/Counter/Counter.js';
+import store from './store/index.js';
 
 function App() {
     return (
-        <div className="app">
-            <BasicForm />
-        </div>
+        <Provider store={store}>
+            <Counter />
+        </Provider>
     );
 }
 
